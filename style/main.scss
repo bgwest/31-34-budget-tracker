@@ -1,0 +1,16 @@
+$background-color: #FFFFFF;
+$font-color : #000000;
+
+html, body{
+  background: $background-color;
+}
+
+p,h1,h2,ul {
+  color: $font-color;
+}
+
+.listExpenses {
+  float: right;
+  margin: auto;
+  padding: 2%;
+}
