@@ -1,4 +1,4 @@
-export const createCard = ({ content, sectionId }) => {
+export const createCard = ({ content, sectionId, expenseAmt }) => {
   console.log('CARD_CREATE CALLED.');
   // console.log(content);
   // console.log(sectionId);
@@ -7,6 +7,7 @@ export const createCard = ({ content, sectionId }) => {
     payload: {
       content,
       sectionId,
+      expenseAmt,
       id: Math.random(),
       timestamp: new Date(),
     },

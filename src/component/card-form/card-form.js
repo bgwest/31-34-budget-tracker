@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const emptyState = { content: ''};
+const emptyState = { content: '', expenseAmt: 0};
 
 class CardForm extends React.Component {
   constructor(props) {
@@ -10,8 +10,13 @@ class CardForm extends React.Component {
   }
 
   handleChange = (event) => {
-    const value = event.target.value;
-    this.setState({ content: value});
+    let value = event.target.value;
+    const name = event.target.name;
+    if (name === 'expenseAmt') {
+      // needed to keep number for total calculations
+      value = Number(value);
+    }
+    this.setState({ [name]: value});
   };
 
   handleSubmit = (event) => {
@@ -46,6 +51,13 @@ class CardForm extends React.Component {
           name="content"
           placeholder="e.g. Orca Pass"
           value={this.state.content}
+          onChange={this.handleChange}
+        />
+        <input
+          type='text'
+          name="expenseAmt"
+          placeholder='expense amount'
+          value={this.state.expenseAmt}
           onChange={this.handleChange}
         />
         <button type="submit"> {buttonText} </button>

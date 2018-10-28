@@ -9,6 +9,7 @@ import DisplaySection from '../display-section/display-section';
 
 class Dashboard extends React.Component {
   render() {
+
     // in the component, state is linked AS PROPS
     const {
       sections,
@@ -18,16 +19,19 @@ class Dashboard extends React.Component {
     } = this.props;
     return (
       <main>
+        <br />
+        <CreateSectionForm onComplete={sectionCreate}/>
+        { /* <br />
+          {`budget (less expenses): ${this.props.totalBudget}`}  */ }
+        <br />
+        {`expense total: ${this.props.totalExpenses}`}
+        <br />
         <nav>
-          <CreateSectionForm onComplete={sectionCreate}/>
-          <br />
-          {`budget (less expenses): ${this.props.totalBudget}`}
-          <br />
-          {`expense total: ${this.props.totalExpenses}`}
-          <br />
-          <h3><b>Site tips:</b></h3>
-          <p>After creating a section, try clicking the title to edit it.</p>
-          <p>Clicking on it again will hide the edit box.</p>
+          <h3 ><b>Site tips:</b></h3>
+          <p>After creating section or card, </p>
+          <p>try double clicking on...</p>
+          <p>- Expense Section Title</p>
+          <p>- Card Expense Title</p>
         </nav>
         <div className="lists">
           {
@@ -55,41 +59,80 @@ const mapStateToProps = (state) => {
   // at start, this will run twice
   // once to establish state in expenseTotal and once to update expenseTotal
   function calculateTotalExpenses(passedState) {
+    console.log('calculateTotalExpenses ran.');
     // if state has been established, calculate total expenses
-    if (Array.isArray(passedState)) {
+    if (Object.keys(passedState).length > 0) {
       let expenseTotal = 0;
-      for (let addTheExpenses = 0; addTheExpenses <= passedState.length - 1; addTheExpenses++) {
-        expenseTotal += passedState[addTheExpenses].expenseAmt;
+      const getKeys = Object.keys(passedState);
+      const getValues = Object.values(passedState);
+      if (passedState[getKeys[0]][0] !== undefined) {
+        for (let iterateIDs = 0; iterateIDs <= getValues.length - 1; iterateIDs++) {
+          const getLengthOfExpenses = Object.keys(getValues[iterateIDs]).length;
+          for (let iterateExpenses = 0; iterateExpenses <= getLengthOfExpenses - 1; iterateExpenses++) {
+            expenseTotal += getValues[iterateIDs][`${iterateExpenses}`].expenseAmt;
+            console.log(getValues[iterateIDs][`${iterateExpenses}`].expenseAmt);
+          }
+        }
       }
+
+      // if (passedState[getKeys[0]][0] !== undefined) {
+      //   for (let propertyIndex = 0; propertyIndex <= getKeys.length - 1; propertyIndex++) {
+      //     console.log(passedState[getKeys[propertyIndex]][0]);
+      //     for (let cardCount = 0; cardCount <= passedState[getKeys[propertyIndex]][0] - 1; cardCount++) {
+      //       console.log(passedState[getKeys[propertyIndex]][0].expenseAmt);
+      //       expenseTotal += passedState[getKeys[propertyIndex]][0].expenseAmt;
+      //     }
+      //   }
+      // }
+
+      // for (const property1 in passedState) {
+      //   // only run this if there are cards
+      //   if (passedState[property1][objIndex] !== undefined) {
+      //     const key = getKeys[objIndex];
+      //     console.log('key:');
+      //     console.log(key);
+      //     console.log('passed state');
+      //     console.log(passedState);
+      //     expenseTotal += passedState[property1][objIndex].expenseAmt;
+      //     console.log(passedState[property1]);
+      //     console.log(passedState[property1][objIndex].expenseAmt);
+      //   }
+      //   console.log(objIndex);
+      //   objIndex += 1;
+      // }
       return expenseTotal;
     } // else
     // if state is not yet a state array...
-    return state;
+    return 0;
   }
 
-  function calculateTotalBudget(passedState) {
-    // if state has been established, calculate total expenses
-    if (Array.isArray(passedState)) {
-      // budget is hard coded for now because expense is my 'variable' piece
-      // this can be changed in future if needed
-      let budgetTotal = 2000;
-      for (let lessTheExpenses = 0; lessTheExpenses <= passedState.length - 1; lessTheExpenses++) {
-        budgetTotal -= passedState[lessTheExpenses].expenseAmt;
-      }
-      if (budgetTotal < 0) {
-        alert('You have exceeded your budget. You can continue, but please re-balance');
-      }
-      return budgetTotal;
-    } // else
-    // if state is not yet a state array...
-    return state;
-  }
+  // function calculateTotalBudget(passedState) {
+  //   console.log('calculateTotalBudget ran.');
+  //   // if state has been established, calculate total expenses
+  //   if (Object.keys(passedState).length > 0) {
+  //     console.log(passedState);
+  //     // budget is hard coded for now because expense is my 'variable' piece
+  //     // this can be changed in future if needed
+  //     let budgetTotal = 2000;
+  //     for (let lessTheExpenses = 0; lessTheExpenses <= passedState.length - 1; lessTheExpenses++) {
+  //       budgetTotal -= passedState[lessTheExpenses].expenseAmt;
+  //     }
+  //     if (budgetTotal < 0) {
+  //       alert('You have exceeded your budget. You can continue, but please re-balance');
+  //     }
+  //     return budgetTotal;
+  //   } // else
+  //   console.log('cards state:');
+  //   console.log(state.cards);
+  //   // if state is not yet a state array...
+  //   return 0;
+  // }
 
   // !: Here, state comes from the store
   return { // This return over here, will become Dashboard.props
     sections: state.sections,
-    totalExpenses: calculateTotalExpenses(state.sections),
-    totalBudget: calculateTotalBudget(state.sections),
+    totalExpenses: calculateTotalExpenses(state.cards),
+    // totalBudget: calculateTotalBudget(state.cards),
   };
 };
 const mapDispatchToProps = (dispatch) => {

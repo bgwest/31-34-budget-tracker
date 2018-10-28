@@ -102,7 +102,7 @@ class DisplaySection extends React.Component {
              onMouseLeave={this.changeTitleStyle.bind(null, this.state.section[section.id], section.id)} // eslint-disable-line
              onMouseOver={this.changeTitleStyle.bind(null, this.state.section[section.id], section.id)} // eslint-disable-line
              className="expenseTypeTitle"
-             onClick={this.toggleExpenseTypeUpdate.bind(null, this.state.section[section.id], section.id) /* eslint-disable-line */ }>
+             onDoubleClick={this.toggleExpenseTypeUpdate.bind(null, this.state.section[section.id], section.id) /* eslint-disable-line */ }>
             {section.expenseType === '' ? 'click to name me' : section.expenseType}
           </p>
           <section>
