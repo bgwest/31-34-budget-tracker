@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const emptyState = {
-  expenseName: '',
+  expenseType: '',
   expenseAmt: 0,
 };
 
 // !: = development notes
 
-class SectionForm extends React.Component {
+class CreateSectionForm extends React.Component {
   constructor(props) {
     super(props);
     // !: UI State
@@ -40,28 +40,28 @@ class SectionForm extends React.Component {
 
         <input
           type='text'
-          name="expenseName"
-          placeholder='expense name'
-          value={this.state.expenseName}
+          name="expenseType"
+          placeholder='e.g. Commute'
+          value={this.state.expenseType}
           onChange={this.handleChange}
           />
-        <input
+        { /*<input
           type='text'
           name="expenseAmt"
           placeholder='expense amount'
           value={this.state.expenseAmt}
           onChange={this.handleChange}
-        />
+        /> */ }
         <br />
-        <button type='submit'> Create Expense </button>
+        <button type='submit'> Add Expense Section </button>
       </form>
     );
   }
 };
 
-SectionForm.propTypes = {
+CreateSectionForm.propTypes = {
   section: PropTypes.object,
   onComplete : PropTypes.func,
 };
 
-export default SectionForm;
+export default CreateSectionForm;

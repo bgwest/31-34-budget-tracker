@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const emptyState = {
-  expenseName: '',
+  expenseType: '',
   expenseAmt: 0,
 };
 
 // !: = development notes
 
-class DeleteExpenses extends React.Component {
+class DeleteExpenseSection extends React.Component {
   constructor(props) {
     super(props);
     // state should never be empty in this form...
@@ -17,6 +17,8 @@ class DeleteExpenses extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    console.log(this.state);
+    console.log(this.props);
     this.props.onComplete(this.state);
   };
 
@@ -24,15 +26,15 @@ class DeleteExpenses extends React.Component {
     return (
       <form
         onSubmit={this.handleSubmit}>
-        <button type='submit'> Delete Expense </button>
+        <button type='submit'> X </button>
       </form>
     );
   }
 };
 
-DeleteExpenses.propTypes = {
+DeleteExpenseSection.propTypes = {
   section: PropTypes.object,
   onComplete : PropTypes.func,
 };
 
-export default DeleteExpenses;
+export default DeleteExpenseSection;

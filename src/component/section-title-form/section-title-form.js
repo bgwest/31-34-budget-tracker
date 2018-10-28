@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const emptyState = {
-  expenseName: '',
+  expenseType: '',
   expenseAmt: 0,
 };
 
 // !: = development notes
 
-class EditExpenses extends React.Component {
+class SectionTitleForm extends React.Component {
   constructor(props) {
     super(props);
     // state should never be empty in this form...
@@ -39,28 +39,28 @@ class EditExpenses extends React.Component {
 
         <input
           type='text'
-          name="expenseName"
-          placeholder='expense name'
-          value={this.state.expenseName}
+          name="expenseType"
+          placeholder='e.g. Commute'
+          value={this.state.expenseType}
           onChange={this.handleChange}
         />
-        <input
+        { /* <input
           type='text'
           name="expenseAmt"
           placeholder='expense amount'
           value={this.state.expenseAmt}
           onChange={this.handleChange}
-        />
+        /> */ }
         <br />
-        <button type='submit'> Submit Edits </button>
+        <button type='submit'> update section title </button>
       </form>
     );
   }
 };
 
-EditExpenses.propTypes = {
+SectionTitleForm.propTypes = {
   section: PropTypes.object,
   onComplete : PropTypes.func,
 };
 
-export default EditExpenses;
+export default SectionTitleForm;
