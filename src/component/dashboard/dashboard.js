@@ -2,33 +2,42 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as sectionActions from '../../action/section-actions';
-import SectionForm from '../section-form/section-form';
-import EditExpenses from '../edit-expenses/edit-expenses';
-import DeleteExpenses from '../delete-expenses/delete-expenses';
+import CreateSectionForm from '../create-section-form/create-section-form';
+import DisplaySection from '../display-section/display-section';
 
 // !: = development notes
 
 class Dashboard extends React.Component {
   render() {
-    console.log(this.props);
+    // in the component, state is linked AS PROPS
+    const {
+      sections,
+      sectionCreate,
+      sectionDelete,
+      sectionUpdate,
+    } = this.props;
     return (
-      <div>
-        <SectionForm onComplete={this.props.sectionCreate}/>
-        <div> { this.props.sections.map(currentSection => <section
-          key={currentSection.id}
-          className="listExpenses">
-          <p><b>expense name: </b><br/>{currentSection.expenseName}</p>
-          <p><b>amount: </b><br/>{currentSection.expenseAmt}</p>
-          <EditExpenses section={currentSection} onComplete={this.props.sectionUpdate}/>
-          <DeleteExpenses section={currentSection} onComplete={this.props.sectionDelete}/>
-          <p>---------------------------------------</p>
-        </section>)}
+      <main>
+        <nav>
+          <CreateSectionForm onComplete={sectionCreate}/>
+          <br />
+          {`budget (less expenses): ${this.props.totalBudget}`}
+          <br />
+          {`expense total: ${this.props.totalExpenses}`}
+          <br />
+          <h3><b>Site tips:</b></h3>
+          <p>After creating a section, try clicking the title to edit it.</p>
+          <p>Clicking on it again will hide the edit box.</p>
+        </nav>
+        <div className="lists">
+          {
+            sections.map((currentSection, i) => <DisplaySection
+              section={currentSection} key={i}
+              sectionDelete={sectionDelete}
+            sectionUpdate={sectionUpdate}/>)
+          }
         </div>
-        <br />
-        {`budget (less expenses): ${this.props.totalBudget}`}
-        <br />
-        {`expense total: ${this.props.totalExpenses}`}
-      </div>
+      </main>
     );
   }
 }
@@ -78,9 +87,9 @@ const mapStateToProps = (state) => {
 
   // !: Here, state comes from the store
   return { // This return over here, will become Dashboard.props
-    sections: state,
-    totalExpenses: calculateTotalExpenses(state),
-    totalBudget: calculateTotalBudget(state),
+    sections: state.sections,
+    totalExpenses: calculateTotalExpenses(state.sections),
+    totalBudget: calculateTotalBudget(state.sections),
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -92,6 +101,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(sectionActions.destory(section));
     },
     sectionUpdate: (section) => {
+      // console.log(section);
       dispatch(sectionActions.update(section));
     },
   };

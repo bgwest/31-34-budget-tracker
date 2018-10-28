@@ -1,15 +1,15 @@
 // !: = development notes
 
 // !: this is a function THAT RETURNS AN ACTION
-export const create = ({ expenseName, expenseAmt }) => {
-  console.log('WTF IS HAPPENING:');
-  console.log(expenseName);
-  console.log(expenseAmt);
+export const create = ({ expenseType, expenseAmt }) => {
+  // console.log('section-action create:');
+  // console.log(expenseType);
+  // console.log(expenseAmt);
   return {
     type: 'CREATE_EXPENSE',
     payload: {
       id: Math.random(),
-      expenseName,
+      expenseType,
       timestamp: new Date(),
       expenseAmt,
     },
