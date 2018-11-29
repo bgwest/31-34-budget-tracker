@@ -39,7 +39,7 @@ class CardForm extends React.Component {
 
   render() {
     const { card } = this.props;
-    const buttonText = card ? 'Update Expense' : 'Create Expense';
+    const buttonText = card ? 'Save' : 'Create Expense';
 
     return (
       <form
