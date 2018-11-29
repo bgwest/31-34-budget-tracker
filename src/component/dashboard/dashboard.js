@@ -1,39 +1,57 @@
+// imports
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as sectionActions from '../../action/section-actions';
 import CreateSectionForm from '../create-section-form/create-section-form';
+import AppUI from '../app-ui/app-ui';
+import SiteTips from '../site-tips/site-tips';
 import DisplaySection from '../display-section/display-section';
 
 // !: = development notes
 
 class Dashboard extends React.Component {
-  render() {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    // this will reset to false each render, but stay true long enough to
+    // process the root redirect after a section creation. see sectionCreateRan below.
+    this.state.sectionCreateRan = false;
+  }
 
+  render() {
     // in the component, state is linked AS PROPS
     const {
       sections,
       sectionCreate,
+      // createExpenseThunk,
       sectionDelete,
       sectionUpdate,
+      location,
     } = this.props;
+
+    const newThunkRenderTest = (receivedState) => {
+      console.log('receivedState:');
+      console.log(receivedState);
+      // createExpenseThunk(receivedState);
+      sectionCreate(receivedState);
+      this.setState({ sectionCreateRan: true });
+    };
+
     return (
       <main>
+        <AppUI/>
         <br />
-        <CreateSectionForm onComplete={sectionCreate}/>
-        { /* <br />
-          {`budget (less expenses): ${this.props.totalBudget}`}  */ }
+        { /* Only render certain pieces if link is clicked */ }
+        {location.pathname === '/sitetips' ? <SiteTips/> : null}
+        { /* if sectionCreate = true ... */ }
+        { this.state.sectionCreateRan ? <Redirect to='/'/> : null }
+        {location.pathname === '/newsection' ? <CreateSectionForm onComplete={newThunkRenderTest}/> : null}
         <br />
-        {`expense total: ${this.props.totalExpenses}`}
+        {location.pathname === '/' ? `expense total: ${this.props.totalExpenses}` : null}
         <br />
-        <nav>
-          <h3 ><b>Site tips:</b></h3>
-          <p>After creating section or card, </p>
-          <p>try double clicking on...</p>
-          <p>- Expense Section Title</p>
-          <p>- Card Expense Title</p>
-        </nav>
-        <div className="lists">
+        <div className="gridList">
           {
             sections.map((currentSection, i) => <DisplaySection
               section={currentSection} key={i}
@@ -52,7 +70,8 @@ Dashboard.propTypes = {
   sectionUpdate: PropTypes.func,
   sections: PropTypes.array,
   totalExpenses: PropTypes.number,
-  totalBudget: PropTypes.number,
+  location: PropTypes.object,
+  // createExpenseThunk: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {
@@ -68,71 +87,22 @@ const mapStateToProps = (state) => {
       if (passedState[getKeys[0]][0] !== undefined) {
         for (let iterateIDs = 0; iterateIDs <= getValues.length - 1; iterateIDs++) {
           const getLengthOfExpenses = Object.keys(getValues[iterateIDs]).length;
-          for (let iterateExpenses = 0; iterateExpenses <= getLengthOfExpenses - 1; iterateExpenses++) {
+          for (let iterateExpenses = 0; iterateExpenses <= getLengthOfExpenses - 1; iterateExpenses++) { // eslint-disable-line max-len
             expenseTotal += getValues[iterateIDs][`${iterateExpenses}`].expenseAmt;
             console.log(getValues[iterateIDs][`${iterateExpenses}`].expenseAmt);
           }
         }
       }
-
-      // if (passedState[getKeys[0]][0] !== undefined) {
-      //   for (let propertyIndex = 0; propertyIndex <= getKeys.length - 1; propertyIndex++) {
-      //     console.log(passedState[getKeys[propertyIndex]][0]);
-      //     for (let cardCount = 0; cardCount <= passedState[getKeys[propertyIndex]][0] - 1; cardCount++) {
-      //       console.log(passedState[getKeys[propertyIndex]][0].expenseAmt);
-      //       expenseTotal += passedState[getKeys[propertyIndex]][0].expenseAmt;
-      //     }
-      //   }
-      // }
-
-      // for (const property1 in passedState) {
-      //   // only run this if there are cards
-      //   if (passedState[property1][objIndex] !== undefined) {
-      //     const key = getKeys[objIndex];
-      //     console.log('key:');
-      //     console.log(key);
-      //     console.log('passed state');
-      //     console.log(passedState);
-      //     expenseTotal += passedState[property1][objIndex].expenseAmt;
-      //     console.log(passedState[property1]);
-      //     console.log(passedState[property1][objIndex].expenseAmt);
-      //   }
-      //   console.log(objIndex);
-      //   objIndex += 1;
-      // }
       return expenseTotal;
     } // else
     // if state is not yet a state array...
     return 0;
   }
 
-  // function calculateTotalBudget(passedState) {
-  //   console.log('calculateTotalBudget ran.');
-  //   // if state has been established, calculate total expenses
-  //   if (Object.keys(passedState).length > 0) {
-  //     console.log(passedState);
-  //     // budget is hard coded for now because expense is my 'variable' piece
-  //     // this can be changed in future if needed
-  //     let budgetTotal = 2000;
-  //     for (let lessTheExpenses = 0; lessTheExpenses <= passedState.length - 1; lessTheExpenses++) {
-  //       budgetTotal -= passedState[lessTheExpenses].expenseAmt;
-  //     }
-  //     if (budgetTotal < 0) {
-  //       alert('You have exceeded your budget. You can continue, but please re-balance');
-  //     }
-  //     return budgetTotal;
-  //   } // else
-  //   console.log('cards state:');
-  //   console.log(state.cards);
-  //   // if state is not yet a state array...
-  //   return 0;
-  // }
-
   // !: Here, state comes from the store
   return { // This return over here, will become Dashboard.props
     sections: state.sections,
     totalExpenses: calculateTotalExpenses(state.cards),
-    // totalBudget: calculateTotalBudget(state.cards),
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -147,6 +117,9 @@ const mapDispatchToProps = (dispatch) => {
       // console.log(section);
       dispatch(sectionActions.update(section));
     },
+    // createExpenseThunk: (section) => {
+    //   dispatch(sectionActions.createExpenseThunk(section));
+    // },
   };
 };
 

@@ -8,6 +8,7 @@ import App from './component/app/app';
 import reducer from './reducer/main-reducer';
 import session from './lib/redux-session';
 import reporter from './lib/redux-reporter';
+import thunk from './middleware/redux-thunk';
 
 import '../style/main.scss';
 
@@ -16,7 +17,7 @@ import '../style/main.scss';
 //------------------------------------------------------------
 // Setup Store
 //------------------------------------------------------------
-const store = createStore(reducer, composeWithDevTools(applyMiddleware(reporter, session)));
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(reporter, session, thunk)));
 
 //------------------------------------------------------------
 // Render
