@@ -17,9 +17,11 @@ A simple expense/budget React SPA (Single Page Application) with React DOM Route
 
 * combine all expense cards created to see your total planned spending
 
-### Bugs
+### Current Bugs
 
-- Currently, the only bug I have been dealing with is if you do not delete the "expense sections" in order of creation, the last expense section will not delete.
+- If you do not delete the "expense sections" in order of creation, the last expense section will not delete.
+- If you do not add an amount to the first section you create, expense total does not add.
+- If you put letters in the amount of the item expense, it changes to expense total to NaN. If you delete the  item it goes away, but ultimately this needs to be fixed.
 
 Recommend: 
 

@@ -89,12 +89,12 @@ class DisplaySection extends React.Component {
     // console.log(sectionCards);
 
     return (
-      <div>
+      <div className="section">
         { /* render new section group */ }
         <section
           key={key}
           className="listExpenses">
-          <p>---------------------------------------</p>
+          { /* <p>---------------------------------------</p> */ }
           { /* state.section property needs to be created on the fly */}
           {this.createSectionState(section.id)}
           <DeleteExpenseSection section={section} onComplete={sectionDelete}/>
@@ -103,7 +103,7 @@ class DisplaySection extends React.Component {
              onMouseOver={this.changeTitleStyle.bind(null, this.state.section[section.id], section.id)} // eslint-disable-line
              className="expenseTypeTitle"
              onDoubleClick={this.toggleExpenseTypeUpdate.bind(null, this.state.section[section.id], section.id) /* eslint-disable-line */ }>
-            {section.expenseType === '' ? 'click to name me' : section.expenseType}
+            {section.expenseType === '' ? 'double-click to name me' : section.expenseType}
           </p>
           <section>
             { this.state.section[section.id].doNotDisplay === false ? <SectionTitleForm section={section} // eslint-disable-line

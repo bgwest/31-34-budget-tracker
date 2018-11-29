@@ -10,6 +10,8 @@ class App extends React.Component {
         <BrowserRouter>
           <div>
             <Route exact path='/' component={Dashboard} />
+            <Route exact path='/sitetips' component={Dashboard} />
+            <Route exact path='/newsection' component={Dashboard} />
           </div>
         </BrowserRouter>
       </div>
