@@ -25,19 +25,17 @@ class Card extends React.Component {
   render() {
     const { card, removeCard } = this.props;
 
-    const editingJSX = <CardForm card={ card } onComplete={ this.handleUpdateCardAndHideForm } /> ;
+    const editingJSX = <CardForm card={ card } onComplete={ this.handleUpdateCardAndHideForm } />;
     const renderJSX = this.state.editing ? editingJSX :
-      <React.Fragment>
-        { card.content }
-        <button onClick={() => removeCard(card)}> X </button>
-      </React.Fragment> ;
+      <div className="expenseLineItem">
+        <button className="removeCardButton" onClick={() => removeCard(card)}> X </button>
+        { `$${card.expenseAmt} - ${card.content}` }
+      </div>;
 
     return (
-      <li>
-        <div onDoubleClick={this.handleUpdateRequest}>
+        <li onDoubleClick={this.handleUpdateRequest}>
           { renderJSX }
-        </div>
-      </li>
+        </li>
     );
   }
 }

@@ -39,6 +39,13 @@ class Dashboard extends React.Component {
       this.setState({ sectionCreateRan: true });
     };
 
+    const checkIfSectionsAreZero = () => {
+      if (sections.length === 0 && location.pathname === '/') {
+        return <p>Looks like your sections are empty. Try creating one : )</p>;
+      } // else
+      return null;
+    };
+
     return (
       <main>
         <AppUI/>
@@ -49,8 +56,10 @@ class Dashboard extends React.Component {
         { this.state.sectionCreateRan ? <Redirect to='/'/> : null }
         {location.pathname === '/newsection' ? <CreateSectionForm onComplete={newThunkRenderTest}/> : null}
         <br />
-        {location.pathname === '/' ? `expense total: ${this.props.totalExpenses}` : null}
+        {location.pathname === '/' ? <h3 className="expenseTotalH3">Expense totals: <span className="expenseTotal">${this.props.totalExpenses}</span></h3> : null}
         <br />
+        { /* if sections are empty, encourage user to create some :) */ }
+        { checkIfSectionsAreZero() }
         <div className="gridList">
           {
             sections.map((currentSection, i) => <DisplaySection

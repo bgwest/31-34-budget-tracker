@@ -17,7 +17,28 @@ p,h1,h2,ul {
   // border:1px #86C2E7;
   // border-style: dashed solid;
   border: 2px solid #86C2E7;
-  box-shadow: 2px 2px 6px 2px #d1d0d0;
+  // box-shadow: 2px 2px 6px 2px #d1d0d0;
+  box-shadow: 2px 2px 6px 2px #7fd2b2;
+}
+
+.sectionTotal {
+  text-align: center;
+  color: #6B6463;
+  margin: 0;
+}
+
+.sectionTotalAmt {
+  color: #900c3f;
+}
+
+.deleteSectionForm {
+  // used to display button on same line as section title
+  // may revisit and generate grid inside of grid?
+  // display: inline;
+}
+
+.deleteExpenseSectionButton {
+  display: inline;
 }
 
 .landingUI {
@@ -53,17 +74,30 @@ p,h1,h2,ul {
   color:#000000;
 }
 
+.expenseTotal {
+  color: #900c3f;
+}
+
+.expenseTotalH3 {
+  // border: 1px black;
+  border: thick double #a9c2cc;
+  width: 20%;
+  text-align: left;
+  padding: 1%;
+}
+
 .listExpenses {
   float: right;
   margin: auto;
-  text-align: center;
   padding: 2%;
 }
 
 .gridList {
   display: grid;
   padding: 2%;
-  grid-template-columns: repeat(5, 1fr);
+  // grid-auto-columns: minmax(100px, auto);
+  // source of truth: https://developer.mozilla.org/en-US/docs/Web/CSS/repeat
+  grid-template-columns: repeat(5, [col-start] max-content [col-middle] max-content [col-end]);
   grid-gap: 10px;
   grid-auto-rows: minmax(100px, auto);
 }
@@ -99,10 +133,32 @@ p,h1,h2,ul {
 }
 
 .expenseTypeTitle {
+  // display: inline;
   text-align: center;
+  // margin-left: 30%;
+  margin: 0;
+}
+
+.updateSectionTitleButton {
+  margin-bottom: 1.0em;
 }
 
 .card-form {
   margin: auto;
   text-align: center;
+}
+
+.cardList {
+  color: green;
+  // need the list look (desired spacing), but without the dot...
+  list-style-type: none;
+}
+
+.removeCardButton {
+  margin-right: 1.0em;
+  margin-bottom: 1.0em;
+}
+
+.expenseLineItem {
+  display: inline-flex;
 }
