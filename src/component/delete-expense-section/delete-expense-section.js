@@ -26,7 +26,7 @@ class DeleteExpenseSection extends React.Component {
     return (
       <form
         onSubmit={this.handleSubmit}>
-        <button type='submit'> X </button>
+        <button className="deleteExpenseSectionButton" type='submit'> X </button>
       </form>
     );
   }

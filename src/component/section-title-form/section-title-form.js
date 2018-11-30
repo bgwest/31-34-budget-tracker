@@ -52,7 +52,7 @@ class SectionTitleForm extends React.Component {
           onChange={this.handleChange}
         /> */ }
         <br />
-        <button type='submit'> update section title </button>
+        <button className="updateSectionTitleButton" type='submit'> update section title </button>
       </form>
     );
   }

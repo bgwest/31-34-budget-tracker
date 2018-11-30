@@ -56,14 +56,15 @@ p,h1,h2,ul {
 .listExpenses {
   float: right;
   margin: auto;
-  text-align: center;
   padding: 2%;
 }
 
 .gridList {
   display: grid;
   padding: 2%;
-  grid-template-columns: repeat(5, 1fr);
+  // grid-auto-columns: minmax(100px, auto);
+  // source of truth: https://developer.mozilla.org/en-US/docs/Web/CSS/repeat
+  grid-template-columns: repeat(5, max-content [col-end]);
   grid-gap: 10px;
   grid-auto-rows: minmax(100px, auto);
 }
@@ -99,10 +100,34 @@ p,h1,h2,ul {
 }
 
 .expenseTypeTitle {
+  display: inline;
   text-align: center;
+}
+
+.deleteExpenseSectionButton {
+  display: inline;
+}
+
+.updateSectionTitleButton {
+  margin-bottom: 1.0em;
 }
 
 .card-form {
   margin: auto;
   text-align: center;
+}
+
+.cardList {
+  color: green;
+  // need the list look (desired spacing), but without the dot...
+  list-style-type: none;
+}
+
+.removeCardButton {
+  margin-right: 1.0em;
+  margin-bottom: 1.0em;
+}
+
+.expenseLineItem {
+  display: inline-flex;
 }

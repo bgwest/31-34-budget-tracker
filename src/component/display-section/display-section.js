@@ -94,7 +94,6 @@ class DisplaySection extends React.Component {
         <section
           key={key}
           className="listExpenses">
-          { /* <p>---------------------------------------</p> */ }
           { /* state.section property needs to be created on the fly */}
           {this.createSectionState(section.id)}
           <DeleteExpenseSection section={section} onComplete={sectionDelete}/>
@@ -105,10 +104,11 @@ class DisplaySection extends React.Component {
              onDoubleClick={this.toggleExpenseTypeUpdate.bind(null, this.state.section[section.id], section.id) /* eslint-disable-line */ }>
             {section.expenseType === '' ? 'double-click to name me' : section.expenseType}
           </p>
+          <p>{`Section Total: $${section.expenseAmt}`}</p>
           <section>
             { this.state.section[section.id].doNotDisplay === false ? <SectionTitleForm section={section} // eslint-disable-line
               onComplete={sectionUpdate}/> : null }
-              <ul>
+              <ul className="cardList">
                 { sectionCards !== undefined ? sectionCards.map(card => <Card
                   card={card} key={card.id} />) : null }
               </ul>
