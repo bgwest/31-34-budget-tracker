@@ -5,9 +5,8 @@ class SiteTips extends React.Component {
   render() {
     return (
       <nav className="siteTips">
-        <h3 ><b>Site tips:</b></h3>
-        <p>After creating section or card, </p>
-        <p>try double clicking on...</p>
+        <h3 ><b>Tips:</b></h3>
+        <p>After creating section or card, try double clicking on:</p>
         <p>- Expense Section Title</p>
         <p>- Card Expense Title</p>
       </nav>

@@ -21,8 +21,8 @@ class DisplaySection extends React.Component {
 
     // handle changing title style
     this.changeTitleStyle = (currentState, id) => {
-      if (currentState.color === '#ff9926') {
-        const color = { color: '#2679ff' };
+      if (currentState.color === '#2399e5') {
+        const color = { color: '#86C2E7' };
         const doNotDisplay = { doNotDisplay: currentState.doNotDisplay };
         currentState = { color: color.color, doNotDisplay: doNotDisplay.doNotDisplay }; // eslint-disable-line
         this.state.section[id] = currentState;
@@ -31,8 +31,8 @@ class DisplaySection extends React.Component {
         // return currentState;
       }
 
-      if (currentState.color === '#2679ff') {
-        const color = { color: '#ff9926' };
+      if (currentState.color === '#86C2E7') {
+        const color = { color: '#2399e5' };
         const doNotDisplay = { doNotDisplay: currentState.doNotDisplay };
         currentState = { color: color.color, doNotDisplay: doNotDisplay.doNotDisplay }; // eslint-disable-line
         this.state.section[id] = currentState;
@@ -71,7 +71,8 @@ class DisplaySection extends React.Component {
 
     this.createSectionState = (id) => {
       if (!this.state.section[id]) {
-        this.state.section[id] = { color: '#ff9926', doNotDisplay: true };
+        // #1cbe6e
+        this.state.section[id] = { color: '#2399e5', doNotDisplay: true };
       }
     };
   }
@@ -97,14 +98,14 @@ class DisplaySection extends React.Component {
           { /* state.section property needs to be created on the fly */}
           {this.createSectionState(section.id)}
           <DeleteExpenseSection section={section} onComplete={sectionDelete}/>
-          <p style={this.state.section[section.id]}
+          <h3 style={this.state.section[section.id]}
              onMouseLeave={this.changeTitleStyle.bind(null, this.state.section[section.id], section.id)} // eslint-disable-line
              onMouseOver={this.changeTitleStyle.bind(null, this.state.section[section.id], section.id)} // eslint-disable-line
              className="expenseTypeTitle"
              onDoubleClick={this.toggleExpenseTypeUpdate.bind(null, this.state.section[section.id], section.id) /* eslint-disable-line */ }>
             {section.expenseType === '' ? 'double-click to name me' : section.expenseType}
-          </p>
-          <p>{`Section Total: $${section.expenseAmt}`}</p>
+          </h3>
+          <p className="sectionTotal">Section Total: <span className="sectionTotalAmt">${section.expenseAmt}</span></p>
           <section>
             { this.state.section[section.id].doNotDisplay === false ? <SectionTitleForm section={section} // eslint-disable-line
               onComplete={sectionUpdate}/> : null }
