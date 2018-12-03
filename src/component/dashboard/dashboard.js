@@ -8,6 +8,7 @@ import CreateSectionForm from '../create-section-form/create-section-form';
 import AppUI from '../app-ui/app-ui';
 import SiteTips from '../site-tips/site-tips';
 import DisplaySection from '../display-section/display-section';
+import * as routes from '../../routes';
 
 // !: = development notes
 
@@ -40,8 +41,22 @@ class Dashboard extends React.Component {
     };
 
     const checkIfSectionsAreZero = () => {
-      if (sections.length === 0 && location.pathname === '/') {
+      if (sections.length === 0 && location.pathname === routes.FE_AUTH_DASHBOARD) {
         return <p>Looks like your sections are empty. Try creating one : )</p>;
+      } // else
+      return null;
+    };
+
+    const renderSectionsOnDashboard = () => {
+      if (sections.length !== 0 && location.pathname === routes.FE_AUTH_DASHBOARD) {
+        return <div className="gridList">
+          {
+            sections.map((currentSection, i) => <DisplaySection
+              section={currentSection} key={i}
+              sectionDelete={sectionDelete}
+              sectionUpdate={sectionUpdate}/>)
+          }
+        </div>;
       } // else
       return null;
     };
@@ -51,23 +66,16 @@ class Dashboard extends React.Component {
         <AppUI/>
         <br />
         { /* Only render certain pieces if link is clicked */ }
-        {location.pathname === '/sitetips' ? <SiteTips/> : null}
+        {location.pathname === routes.FE_SITE_TIPS ? <SiteTips/> : null}
         { /* if sectionCreate = true ... */ }
-        { this.state.sectionCreateRan ? <Redirect to='/'/> : null }
-        {location.pathname === '/newsection' ? <CreateSectionForm onComplete={newThunkRenderTest}/> : null}
+        { this.state.sectionCreateRan ? <Redirect to={routes.FE_AUTH_DASHBOARD}/> : null }
+        {location.pathname === routes.FE_NEW_SECTION ? <CreateSectionForm onComplete={newThunkRenderTest}/> : null /* eslint-disable-line max-len */ }
         <br />
-        {location.pathname === '/' ? <h3 className="expenseTotalH3">Expense totals: <span className="expenseTotal">${this.props.totalExpenses}</span></h3> : null}
+        {location.pathname === routes.FE_AUTH_DASHBOARD ? <h3 className="expenseTotalH3">Expense totals: <span className="expenseTotal">${this.props.totalExpenses}</span></h3> : null}
         <br />
         { /* if sections are empty, encourage user to create some :) */ }
         { checkIfSectionsAreZero() }
-        <div className="gridList">
-          {
-            sections.map((currentSection, i) => <DisplaySection
-              section={currentSection} key={i}
-              sectionDelete={sectionDelete}
-            sectionUpdate={sectionUpdate}/>)
-          }
-        </div>
+        { renderSectionsOnDashboard() }
       </main>
     );
   }
