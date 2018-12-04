@@ -1,5 +1,11 @@
+// imports
+
+// packages
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// styles
+import './card-form.scss';
 
 const emptyState = { content: '', expenseAmt: 0};
 

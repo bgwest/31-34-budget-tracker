@@ -1,4 +1,4 @@
-# Fun Budgie - Front-end
+# Fun Budgie Front-end
 
 ## Overview
 

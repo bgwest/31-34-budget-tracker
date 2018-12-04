@@ -1,8 +1,18 @@
+// imports
+
+// packages
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
+// components
 import CardForm from '../card-form/card-form';
+
+// actions
 import * as cardActions from '../../action/card-actions';
+
+// styles
+import './card.scss';
 
 class Card extends React.Component {
   constructor(props) {

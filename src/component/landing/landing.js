@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as routes from '../../routes';
-import Login from '../login/login';
 
 class Landing extends React.Component {
   determineLanding(token) {

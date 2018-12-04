@@ -1,14 +1,25 @@
 // imports
+
+// packages
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import * as sectionActions from '../../action/section-actions';
+
+// components
 import CreateSectionForm from '../create-section-form/create-section-form';
 import AppUI from '../app-ui/app-ui';
 import SiteTips from '../site-tips/site-tips';
 import DisplaySection from '../display-section/display-section';
+
+// actions
+import * as sectionActions from '../../action/section-actions';
+
+// vars
 import * as routes from '../../routes';
+
+// styles
+import './dashboard.scss';
 
 // !: = development notes
 

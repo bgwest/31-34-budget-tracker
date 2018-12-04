@@ -1,12 +1,16 @@
+// imports
+
+// package
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// styles
+import './section-title-form.scss';
 
 const emptyState = {
   expenseType: '',
   expenseAmt: 0,
 };
-
-// !: = development notes
 
 class SectionTitleForm extends React.Component {
   constructor(props) {

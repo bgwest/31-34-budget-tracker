@@ -1,0 +1,61 @@
+@import "../../../style/vars";
+
+.auth-form{
+  max-width:400px;
+  margin:50px auto;
+  background:#fff;
+  border-radius:2px;
+  font-family: $proxima, sans-serif;
+    &.signup {
+      margin: 0px auto;
+    }
+}
+
+.auth-form h1{
+  display: block;
+  text-align: center;
+  padding: 0;
+  margin: 0 0 20px 0;
+  color: #5C5C5C;
+  font-size:x-large;
+}
+
+.auth-form input[type="text"],
+.auth-form input[type="email"],
+.auth-form input[type="number"],
+.auth-form input[type="search"],
+.auth-form input[type="password"],
+.auth-form select
+{
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  width: 100%;
+  display: block;
+  outline: none;
+  border: none;
+  height: 25px;
+  line-height: 25px;
+  font-size: 16px;
+  padding: 0;
+  font-family: $proxima, serif;
+}
+
+.auth-form button[type="submit"],
+.auth-form button[type="button"]{
+  background: $color-secondary;
+  border: none;
+  padding: 10px 20px 10px 20px;
+  border-bottom: 3px solid $buttonHoverBackground;
+  border-radius: 3px;
+  color: #D2E2FF;
+}
+
+.auth-form button[type="submit"]:hover,
+.auth-form button[type="button"]:hover{
+  background: $buttonHoverBackground;
+  color:#fff;
+}
+button:focus {
+  outline: none;
+}

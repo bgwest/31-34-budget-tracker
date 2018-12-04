@@ -1,0 +1,50 @@
+@import "vars";
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@font-face {
+  font-family: "Proxima_Nova";
+  src: url("../assets/proxima_nova_reg.ttf");
+}
+
+body {
+  background-color: $color-accent;
+  font-family: $proxima;
+  color: $color-secondary;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+h1 {
+  font-family: $proxima;
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 3%;
+}
+
+html {
+  overflow-y: scroll;
+}
+.logo {
+  margin:50px auto;
+  width: 250px;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+}
+a:visited {
+  color: $color-secondary;
+}
+
+$background-color: #FFFFFF;
+$font-color : #000000;
+
+html, body{
+  background: $background-color;
+}
+
+p,h1,h2,ul {
+  color: $font-color;
+}
