@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// styles
+import './delete-expense-section.scss';
+
 const emptyState = {
   expenseType: '',
   expenseAmt: 0,

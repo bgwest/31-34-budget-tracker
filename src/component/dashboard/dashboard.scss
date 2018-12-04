@@ -1,0 +1,54 @@
+// styles - dashboard component
+
+.expenseTotalH3 {
+  // border: 1px black;
+  border: thick double #a9c2cc;
+  width: 20%;
+  text-align: left;
+  padding: 1%;
+}
+
+.expenseTotal {
+  color: #900c3f;
+}
+
+.gridList {
+  display: grid;
+  padding: 2%;
+  // grid-auto-columns: minmax(100px, auto);
+  // source of truth: https://developer.mozilla.org/en-US/docs/Web/CSS/repeat
+  // [col-start] max-content [col-middle] ...
+  grid-template-columns: repeat(2, [col-start] max-content [col-middle] max-content [col-end]);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+
+.one {
+  grid-column: 1 / 3;
+  grid-row: 1;
+}
+
+.two {
+  grid-column: 2 / 4;
+  grid-row: 1 / 3;
+}
+
+.three {
+  grid-column: 1;
+  grid-row: 2 / 5;
+}
+
+.four {
+  grid-column: 3;
+  grid-row: 3;
+}
+
+.five {
+  grid-column: 2;
+  grid-row: 4;
+}
+
+.six {
+  grid-column: 3;
+  grid-row: 4;
+}
