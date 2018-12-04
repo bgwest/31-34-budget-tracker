@@ -1,0 +1,41 @@
+// styles - display-section component
+
+.section {
+  // border:1px #86C2E7;
+  // border-style: dashed solid;
+  border: 2px solid #86C2E7;
+  // box-shadow: 2px 2px 6px 2px #d1d0d0;
+  box-shadow: 2px 2px 6px 2px #7fd2b2;
+  // margin-auto needed for now so boxes do all not mimick the size when cols repeat
+  // may need to re-adjust grid or this later
+  margin: auto;
+}
+
+.listExpenses {
+  float: right;
+  // margin: auto;
+  padding: 2%;
+}
+
+.expenseTypeTitle {
+  // display: inline;
+  text-align: center;
+  // margin-left: 30%;
+  margin: 0;
+}
+
+.sectionTotal {
+  text-align: center;
+  color: #6B6463;
+  margin: 0;
+}
+
+.sectionTotalAmt {
+  color: #900c3f;
+}
+
+.cardList {
+  color: green;
+  // need the "list look" (aka: desired spacing), but without the dot...
+  list-style-type: none;
+}

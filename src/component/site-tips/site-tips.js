@@ -1,5 +1,8 @@
 import React from 'react';
 
+// style
+import './site-tips.scss';
+
 class SiteTips extends React.Component {
   // constructor, super(props)
   render() {

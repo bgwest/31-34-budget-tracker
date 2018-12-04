@@ -9,6 +9,9 @@ import * as cardActions from '../../action/card-actions';
 
 import DeleteExpenseSection from '../delete-expense-section/delete-expense-section';
 
+// styles
+import './display-section.scss';
+
 class DisplaySection extends React.Component {
   constructor(props) {
     super(props);
